@@ -4,8 +4,8 @@
 
 
 const API = (function() {
+
   const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
-  
   const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
   
   const fetchVideos = (function(searchTerm, callback) {
@@ -16,9 +16,9 @@ const API = (function() {
       'part': 'snippet',
       'q': searchTerm,
       'type': '',
-      'key': this.API_KEY
+      'key': API_KEY
     };
-    $.getJSON(this.BASE_URL, params, callback);
+    $.getJSON(BASE_URL, params, callback);
   });
   
   const decorateResponse = function(response) {

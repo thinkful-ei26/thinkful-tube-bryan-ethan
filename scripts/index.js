@@ -947,9 +947,9 @@ const generateVideoItemHtml = function(video) {
 // // TASK:
 // // 1. Set the received array as the value held in store.videos
 // // TEST IT!
-const addVideosToStore = function(videos) {
-  store.videos = videos;
-};
+// const addVideosToStore = function(videos) {
+//   store.videos = videos;
+// };
 
 // console.log(store.videos);
 
@@ -994,11 +994,10 @@ const handleFormSubmit = function() {
     const searchResult = $(event.currentTarget).find('#search-term').val();
     console.log(searchResult);
     $('#search-term').val('');
-    console.log(API.fetchVideos(MOCK_DATA));
+    console.log(API.fetchVideos);
     API.fetchVideos(searchResult, (x) => {
       const decorated = API.decorateResponse(x);
-      console.log(decorated);
-      // store.setVideos(decorated);
+      store.setVideos(decorated);
       console.log(store.videos);
       // const returnArray = decorateResponse(APIReturn);
       // addVideosToStore(APIReturn);
