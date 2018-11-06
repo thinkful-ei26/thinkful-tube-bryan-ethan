@@ -1,4 +1,5 @@
 /*eslint-env jquery*/
+/* global store, API, Item */
 'use strict';
 
 const VideoList = function() {
@@ -29,11 +30,11 @@ const VideoList = function() {
         console.log(store.videos);
         render();
       });
-    })};
+    });};
 
   const bindEventListeners = function() {
-    handleFormSubmit()
-  }
+    handleFormSubmit();
+  };
   
   return {
     generateListItem,
@@ -43,15 +44,3 @@ const VideoList = function() {
   };
 
 }();
-
-// const generateVideoItemHtml = function(video) {
-//   return `
-//   <li data-video-id="${video.id}">${video.title}</li>
-//     <img src="${video.thumbnail}" alt="thumbail image">`;
-// };
-
-
-// const render = function() {
-//   const videosToDOM = store.videos.map(video => generateVideoItemHtml(video)).join();
-//   $('ul').html(videosToDOM);
-// };
