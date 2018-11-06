@@ -892,7 +892,8 @@ const fetchVideos = function(searchTerm, callback) {
   $.getJSON(BASE_URL, params, callback);
 };
 
-fetchVideos('puppies');
+
+// fetchVideos('puppies');
 // console.log(fetchVideos('puppies'));
 
 /**
@@ -911,11 +912,12 @@ fetchVideos('puppies');
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
+  console.log('response is ', response);
   return response.items.map(function(item) {
     return {
-      'id': item.id.videoId, 
-      'thumbnail': item.snippet.thumbnails.default.url, 
-      'title': item.snippet.title
+      id: item.id.videoId, 
+      thumbnail: item.snippet.thumbnails.default.url, 
+      title: item.snippet.title
     };});
 };
 
@@ -948,7 +950,7 @@ const addVideosToStore = function(videos) {
   store.videos = videos;
 };
 
-console.log(store.videos);
+// console.log(store.videos);
 
 
 /**
@@ -986,15 +988,19 @@ const render = function() {
 // TEST IT!
 const handleFormSubmit = function() {
   $('form').on('submit', function(event){
-    console.log('form ran');
+    // console.log('form ran');
     event.preventDefault();
     const searchResult = $(event.currentTarget).find('#search-term').val();
-    console.log(searchResult);
-    $('#search-term').val('');
-    const APIReturn = fetchVideos(searchResult);
-    const returnArray = decorateResponse(APIReturn);
-    addVideosToStore(returnArray);
-    render();
+    // console.log(searchResult);
+    $('#search-term').val('');  
+    fetchVideos(searchResult, (x) => {
+      const decorated = decorateResponse(x);
+      addVideosToStore(decorated);
+      // const returnArray = decorateResponse(APIReturn);
+      // addVideosToStore(APIReturn);
+      render();
+      
+    });
   });
 };
 
