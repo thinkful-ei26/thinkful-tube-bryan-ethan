@@ -1,8 +1,8 @@
 /*eslint-env jquery*/
-/* global store, fetchVideos, Item, API */
+/* global store, fetchVideos, Item, API, VideoList */
 'use strict';
 
-const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
+// const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -863,7 +863,7 @@ const MOCK_DATA =
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
+// const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 
 // function fetchVideos (searchTerm, callback) {
@@ -933,11 +933,11 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // TASK:
 // 1. Using the decorated object, return an HTML string containing all the expected
 // TEST IT!
-const generateVideoItemHtml = function(video) {
-  return `
-  <li data-video-id="${video.id}">${video.title}</li>
-    <img src="${video.thumbnail}" alt="thumbail image">`;
-};
+// const generateVideoItemHtml = function(video) {
+//   return `
+//   <li data-video-id="${video.id}">${video.title}</li>
+//     <img src="${video.thumbnail}" alt="thumbail image">`;
+// };
 
 // /**
 //  * @function addVideosToStore
@@ -962,10 +962,10 @@ const generateVideoItemHtml = function(video) {
 // 1. Map through `store.videos`, sending each `video` through `generateVideoItemHtml`
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
-const render = function() {
-  const videosToDOM = store.videos.map(video => generateVideoItemHtml(video)).join();
-  $('ul').html(videosToDOM);
-};
+// const render = function() {
+//   const videosToDOM = store.videos.map(video => generateVideoItemHtml(video)).join();
+//   $('ul').html(videosToDOM);
+// };
 
 // decorateResponse(MOCK_DATA);
 // addVideosToStore(decorateResponse(MOCK_DATA));
@@ -986,30 +986,28 @@ const render = function() {
 //   f) Inside the callback, add the decorated response into your store using the 
 //      `addVideosToStore` function
 //   g) Inside the callback, run the `render` function 
-// TEST IT!
-const handleFormSubmit = function() {
-  $('form').on('submit', function(event){
-    // console.log('form ran');
-    event.preventDefault();
-    const searchResult = $(event.currentTarget).find('#search-term').val();
-    console.log(searchResult);
-    $('#search-term').val('');
-    console.log(API.fetchVideos);
-    API.fetchVideos(searchResult, (x) => {
-      const decorated = API.decorateResponse(x);
-      store.setVideos(decorated);
-      console.log(store.videos);
-      // const returnArray = decorateResponse(APIReturn);
-      // addVideosToStore(APIReturn);
-      render();
+// // TEST IT!
+// const handleFormSubmit = function() {
+//   $('form').on('submit', function(event){
+//     // console.log('form ran');
+//     event.preventDefault();
+//     const searchResult = $(event.currentTarget).find('#search-term').val();
+//     console.log(searchResult);
+//     $('#search-term').val('');
+//     console.log(API.fetchVideos);
+//     API.fetchVideos(searchResult, (x) => {
+//       const decorated = API.decorateResponse(x);
+//       store.setVideos(decorated);
+//       console.log(store.videos);
+//       render();
       
-    });
-  });
-};
+//     });
+//   });
+// };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
-  handleFormSubmit();
+  VideoList.bindEventListeners();
 });
