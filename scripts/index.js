@@ -53,7 +53,7 @@ const fetchVideos = function(searchTerm, callback) {
   $.getJSON(BASE_URL, params, response => console.log(response));
 };
 
-fetchVideos('puppies');
+// fetchVideos('puppies');
 // console.log(fetchVideos('puppies'));
 
 /**
@@ -68,11 +68,11 @@ fetchVideos('puppies');
 // 2. Return an array of objects, where each object contains the keys `id`, `title`, 
 //    `thumbnail` which each hold the appropriate values from the API item object. You 
 //    WILL have to dig into several nested properties!
-//
+//  
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  const results = response.items.map((item, index) => item.id, item.snippet.thumbnails, item.snippet.title);
 };
 
 /**
