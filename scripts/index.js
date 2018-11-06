@@ -1,4 +1,5 @@
 /*eslint-env jquery*/
+/* global store, fetchVideos, Item, API */
 'use strict';
 
 const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
@@ -855,10 +856,10 @@ const MOCK_DATA =
   ]
 };
  
-const store = {
-  videos: [
-  ]
-};
+// const store = {
+//   videos: [
+//   ]
+// };
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
@@ -881,16 +882,16 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //    as the last argument
 //
 // TEST IT! Execute this function and console log the results inside the callback.
-const fetchVideos = function(searchTerm, callback) {
-  const params = {
-    'maxResults': '25',
-    'part': 'snippet',
-    'q': searchTerm,
-    'type': '',
-    'key': API_KEY
-  };
-  $.getJSON(BASE_URL, params, callback);
-};
+// const fetchVideos = function(searchTerm, callback) {
+//   const params = {
+//     'maxResults': '25',
+//     'part': 'snippet',
+//     'q': searchTerm,
+//     'type': '',
+//     'key': API_KEY
+//   };
+//   $.getJSON(BASE_URL, params, callback);
+// };
 
 
 // fetchVideos('puppies');
@@ -911,15 +912,15 @@ const fetchVideos = function(searchTerm, callback) {
 //  
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
-const decorateResponse = function(response) {
-  console.log('response is ', response);
-  return response.items.map(function(item) {
-    return {
-      id: item.id.videoId, 
-      thumbnail: item.snippet.thumbnails.default.url, 
-      title: item.snippet.title
-    };});
-};
+// const decorateResponse = function(response) {
+//   console.log('response is ', response);
+//   return response.items.map(function(item) {
+//     return {
+//       id: item.id.videoId, 
+//       thumbnail: item.snippet.thumbnails.default.url, 
+//       title: item.snippet.title
+//     };});
+// };
 
 // console.log(decorateResponse(MOCK_DATA));
 
@@ -938,14 +939,14 @@ const generateVideoItemHtml = function(video) {
     <img src="${video.thumbnail}" alt="thumbail image">`;
 };
 
-/**
- * @function addVideosToStore
- * Store modification function to set decorated video objects
- * @param {array} videos - decorated video objects
- */
-// TASK:
-// 1. Set the received array as the value held in store.videos
-// TEST IT!
+// /**
+//  * @function addVideosToStore
+//  * Store modification function to set decorated video objects
+//  * @param {array} videos - decorated video objects
+//  */
+// // TASK:
+// // 1. Set the received array as the value held in store.videos
+// // TEST IT!
 const addVideosToStore = function(videos) {
   store.videos = videos;
 };
@@ -991,11 +992,14 @@ const handleFormSubmit = function() {
     // console.log('form ran');
     event.preventDefault();
     const searchResult = $(event.currentTarget).find('#search-term').val();
-    // console.log(searchResult);
-    $('#search-term').val('');  
-    fetchVideos(searchResult, (x) => {
-      const decorated = decorateResponse(x);
-      addVideosToStore(decorated);
+    console.log(searchResult);
+    $('#search-term').val('');
+    console.log(API.fetchVideos(MOCK_DATA));
+    API.fetchVideos(searchResult, (x) => {
+      const decorated = API.decorateResponse(x);
+      console.log(decorated);
+      // store.setVideos(decorated);
+      console.log(store.videos);
       // const returnArray = decorateResponse(APIReturn);
       // addVideosToStore(APIReturn);
       render();
