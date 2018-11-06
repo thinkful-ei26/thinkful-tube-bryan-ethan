@@ -1,3 +1,6 @@
+/*eslint-env jquery*/
+'use strict';
+
 const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
 
 /*
@@ -14,20 +17,24 @@ const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
   }
 */
 const store = {
-  videos: []
+  videos: [
+  ]
 };
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
 const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
-/**
- * @function fetchVideos
- * Async function, responsible for calling the Youtube API with jQuery, constructing
- * the correct query object, and passing along the callback into the AJAX call.
- * @param {string}   searchTerm
- * @param {function} callback
- */
+
+// function fetchVideos (searchTerm, callback) {
+ 
+// }
+//  * Async function, responsible for calling the Youtube API with jQuery, constructing
+//  * the correct query object, and passing along the callback into the AJAX call.
+//  * @param {string}   searchTerm
+//  * @param {function} callback
+ 
+
 // TASK:
 // 1. Use `searchTerm` to construct the right query object based on the Youtube API docs
 //    - Refer to curriculum assignment for help with the required parameters
@@ -36,8 +43,18 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //
 // TEST IT! Execute this function and console log the results inside the callback.
 const fetchVideos = function(searchTerm, callback) {
-
+  const params = {
+    'maxResults': '25',
+    'part': 'snippet',
+    'q': `${searchTerm}`,
+    'type': '',
+    'key': API_KEY
+  };
+  $.getJSON(BASE_URL, params, response => console.log(response));
 };
+
+fetchVideos('puppies');
+// console.log(fetchVideos('puppies'));
 
 /**
  * @function decorateResponse
