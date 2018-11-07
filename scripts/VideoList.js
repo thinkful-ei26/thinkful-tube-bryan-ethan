@@ -18,20 +18,12 @@ const VideoList = (function(){
 
   const handleFormSubmit = function() {
     $('form').on('submit', function(event){
-      // console.log('form ran');
       event.preventDefault();
       const searchResult = $(event.currentTarget).find('#search-term').val();
-      console.log(searchResult);
       $('#search-term').val('');
-      //console.log(API.fetchVideos);
       API.fetchVideos(searchResult, (x) => {
-        const decorated = API.decorateResponse(x);
-        store.setVideos(decorated);
-        console.log(store.videos);
-        // const returnArray = decorateResponse(APIReturn);
-        // addVideosToStore(APIReturn);
+        store.setVideos(API.decorateResponse(x));
         render();
-        
       });
     });
   };
@@ -46,9 +38,3 @@ const VideoList = (function(){
     bindEventListener
   };
 } () );
-
-// const generateVideoItemHtml = function(video) {
-//   return `
-//   <li data-video-id="${video.id}">${video.title}</li>
-//     <img src="${video.thumbnail}" alt="thumbail image">`;
-// };

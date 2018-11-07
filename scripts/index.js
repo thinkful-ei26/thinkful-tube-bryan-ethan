@@ -1,5 +1,5 @@
 /*eslint-env jquery*/
-/* global store, fetchVideos, Item, API */
+/* global store, fetchVideos, Item, API, VideoList */
 'use strict';
 
 // const API_KEY = 'AIzaSyBXbeUJ94Ms2pEiW8Q5IsdNINtb--OvogA';
